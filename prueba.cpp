@@ -12,8 +12,7 @@ void main()
 {
     printf("\nHola mundo");
     printf("\n============");
-    printf("\nRadio = ",a
-    );
+    printf("\nRadio = ", c);
     scanf("hola",&radio);
 
     radio = (3+5)*8-(10-4)/2;
@@ -22,7 +21,7 @@ void main()
 
     if ((3+5)*8 > z)
     {
-        printf("\nEs mayor",z);
+        printf("\nEs mayor");
     } 
 
     if (radio % 2 == 0)

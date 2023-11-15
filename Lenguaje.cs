@@ -140,9 +140,11 @@ namespace LYA1_Sintaxis1
             if (getContenido() == ",")
             {
 
+                match(",");
                 match(Tipos.Identificador);
 
             }
+
             match(")");
             match(";");
 
