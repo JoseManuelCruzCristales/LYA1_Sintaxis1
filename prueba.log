@@ -94,6 +94,27 @@ radio = Identificador
 / = OperadorFactor
 2 = Numero
 ; = FinSentencia
+x = Identificador
++= = IncrementoTermino
+; = FinSentencia
+x = Identificador
+-= = IncrementoTermino
+; = FinSentencia
+x = Identificador
+++ = IncrementoTermino
+; = FinSentencia
+x = Identificador
+-- = IncrementoTermino
+; = FinSentencia
+x = Identificador
+*= = IncrementoFactor
+; = FinSentencia
+x = Identificador
+/= = IncrementoFactor
+; = FinSentencia
+x = Identificador
+%= = IncrementoFactor
+; = FinSentencia
 z = Identificador
 = = Asignacion
 ( = Caracter
@@ -120,6 +141,16 @@ z = Identificador
 printf = Identificador
 ( = Caracter
 "\nEs mayor" = Cadena
+) = Caracter
+; = FinSentencia
+} = Fin
+else = reservada
+{ = Inicio
+printf = Identificador
+( = Caracter
+"no lo es " = Cadena
+, = Caracter
+c = Identificador
 ) = Caracter
 ; = FinSentencia
 } = Fin

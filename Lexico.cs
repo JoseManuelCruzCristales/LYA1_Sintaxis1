@@ -8,10 +8,9 @@ namespace LYA1_Sintaxis1
 {
     public class Lexico : Token, IDisposable
     {
+        public int linea;
         const int F = -1;
-        const int E = -2;
-        int linea;
-        private StreamReader archivo;
+        const int E = -2; private StreamReader archivo;
         protected StreamWriter log;
 
         int[,] TRAND =
@@ -129,10 +128,10 @@ namespace LYA1_Sintaxis1
         {
             switch (estado)
             {
-                case  1: setClasificacion(Tipos.Identificador); break;
-                case  2: setClasificacion(Tipos.Numero); break;
-                case  8: setClasificacion(Tipos.Asignacion); break;
-                case  9: setClasificacion(Tipos.OperadorRelacional); break;
+                case 1: setClasificacion(Tipos.Identificador); break;
+                case 2: setClasificacion(Tipos.Numero); break;
+                case 8: setClasificacion(Tipos.Asignacion); break;
+                case 9: setClasificacion(Tipos.OperadorRelacional); break;
                 case 10: setClasificacion(Tipos.FinSentencia); break;
                 case 11: setClasificacion(Tipos.Caracter); break;
                 case 12: setClasificacion(Tipos.Caracter); break;
@@ -159,13 +158,11 @@ namespace LYA1_Sintaxis1
         {
             char c;
             string buffer = "";
-
             int estado = 0;
 
             while (estado >= 0)
             {
                 c = (char)archivo.Peek();
-
                 estado = TRAND[estado, columna(c)];
                 clasificar(estado);
 
@@ -173,6 +170,11 @@ namespace LYA1_Sintaxis1
                 {
                     // si el caracter fue enter incrementa la linea
                     archivo.Read();
+
+                    if (c == '\n')
+                    {
+                        linea++;
+                    }
                     if (estado > 0)
                     {
                         buffer += c;
@@ -189,6 +191,7 @@ namespace LYA1_Sintaxis1
                 {
                     throw new Error("Lexico: Se espera un digito", log);
                 }
+
                 else if (getClasificacion() == Tipos.Cadena)
                 {
 
@@ -204,7 +207,7 @@ namespace LYA1_Sintaxis1
                     {
                         case "char":
                         case "int":
-                        case "float": 
+                        case "float":
                             setClasificacion(Tipos.tipoDatos);
                             break;
                         case "while":

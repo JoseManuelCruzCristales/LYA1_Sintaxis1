@@ -4,14 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 
 /*
-    Requerimiento 1: Printf -> printf(cadena(, Identificador)?);
-    Requerimiento 2: Scanf -> scanf(cadena,&Identificador);
+    Requerimiento 1: Printf -> printf(cadena(, Identificador)?); OK 
+    Requerimiento 2: Scanf -> scanf(cadena,&Identificador); OK
     Requerimiento 3: Agregar a la Asignacion +=, -=, *=. /=, %=
                      Ejemplo:
                      Identificador IncrementoTermino Expresion;
                      Identificador IncrementoFactor Expresion;
-    Requerimiento 4: Agregar el else optativo al if
-    Requerimiento 5: Indicar el número de linea de los errores
+    Requerimiento 4: Agregar el else optativo al if OK
+    Requerimiento 5: Indicar el número de linea de los errores OK
 */
 
 namespace LYA1_Sintaxis1
@@ -131,7 +131,6 @@ namespace LYA1_Sintaxis1
 
         // Requerimiento 1: Printf -> printf(cadena(, Identificador)?);
 
-
         private void Printf()
         {
             match("printf");
@@ -139,12 +138,9 @@ namespace LYA1_Sintaxis1
             match(Tipos.Cadena);
             if (getContenido() == ",")
             {
-
                 match(",");
                 match(Tipos.Identificador);
-
             }
-
             match(")");
             match(";");
 
@@ -162,7 +158,6 @@ namespace LYA1_Sintaxis1
             match(Tipos.Identificador);
             match(")");
             match(";");
-
         }
 
         //Asignacion -> Identificador (++ | --) | (= Expresion);
@@ -174,28 +169,30 @@ namespace LYA1_Sintaxis1
         private void Asignacion()
         {
             match(Tipos.Identificador);
-            if (getClasificacion() == Tipos.OperadorTermino)
-            {
-                match(Tipos.OperadorTermino);
-            }
-            else if (getClasificacion() == Tipos.IncrementoTermino)
+
+            if (getClasificacion() == Tipos.IncrementoTermino)
             {
                 match(Tipos.IncrementoTermino);
 
+                match(";");
             }
             else if (getClasificacion() == Tipos.IncrementoFactor)
             {
                 match(Tipos.IncrementoFactor);
+
+                match(";");
             }
             else
             {
                 match("=");
                 Expresion();
+                match(";");
             }
-            match(";");
+
         }
-        //If -> if (Condicion) instruccion | bloqueInstrucciones 
+        //If -> (if (Condicion) instruccion | bloqueInstrucciones )
         //      (else instruccion | bloqueInstrucciones)?
+        // Requerimiento 4: Agregar el else optativo al if
         private void If()
         {
             match("if");
@@ -210,6 +207,22 @@ namespace LYA1_Sintaxis1
             {
                 Instruccion();
             }
+
+            if (getContenido() == "else")
+            {
+                match("else");
+
+                if (getContenido() == "{")
+                {
+                    bloqueInstrucciones();
+                }
+                else
+                {
+                    Instruccion();
+                }
+
+            }
+
         }
         //Condicion -> Expresion operadoRelacional Expresion
         private void Condicion()
