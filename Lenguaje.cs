@@ -169,26 +169,26 @@ namespace LYA1_Sintaxis1
         private void Asignacion()
         {
             match(Tipos.Identificador);
-
-            if (getClasificacion() == Tipos.IncrementoTermino)
+            if (getContenido() == "++" || getContenido() == "--")
             {
                 match(Tipos.IncrementoTermino);
-
-                match(";");
+            }
+            else if (getClasificacion() == Tipos.IncrementoTermino)
+            {
+                match(Tipos.IncrementoTermino);
+                Expresion();
             }
             else if (getClasificacion() == Tipos.IncrementoFactor)
             {
                 match(Tipos.IncrementoFactor);
-
-                match(";");
+                Expresion();
             }
             else
             {
                 match("=");
                 Expresion();
-                match(";");
             }
-
+            match(";");
         }
         //If -> (if (Condicion) instruccion | bloqueInstrucciones )
         //      (else instruccion | bloqueInstrucciones)?
@@ -207,11 +207,9 @@ namespace LYA1_Sintaxis1
             {
                 Instruccion();
             }
-
             if (getContenido() == "else")
             {
                 match("else");
-
                 if (getContenido() == "{")
                 {
                     bloqueInstrucciones();
@@ -220,9 +218,7 @@ namespace LYA1_Sintaxis1
                 {
                     Instruccion();
                 }
-
             }
-
         }
         //Condicion -> Expresion operadoRelacional Expresion
         private void Condicion()

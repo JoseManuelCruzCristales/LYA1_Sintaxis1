@@ -1,44 +1,53 @@
 #include <stdio.h>
 #include <math.h>
-#include <stdio>
-#include <math>
 
-char a;
-int a, b, c, d, radio;
-float x, y, z;
-char w;
+int altura,i,j;
+float x,y;
 
 void main()
 {
-    printf("\nHola mundo");
-    printf("\n============");
-    printf("\nRadio = ", c);
-    scanf("hola", &radio);
-
-    radio = (3 + 5) * 8 - (10 - 4) / 2;
-    x += ;
-    x -= ;
+    y = 10;
+    x = 9;
+    x += (3 + 5) * 8 - (10 - 4) / 2; 
+    x /= (y-3); 
+    x --; 
+    x *= (x-7);
     x++;
-    x--;
-    x *= ;
-    x /= ;
-    x %= ;
-
-    z = (a + b) * c;
-
-    if ((3 + 5) * 8 > z)
+    printf("\nValor de altura = ");
+    scanf("%d",&altura);
+/*
+    for (i = 1; i<=altura; i++)
     {
-        printf("\nEs mayor");
+        for (j = 1; j<=i; j++)
+        {
+            printf("",j);
+        }
+        printf("\n");
     }
-    else
+    i = 0;
+    do
     {
-
-        printf("no lo es ", c);
+        printf("-");
+        i++;
     }
-   
-
-    if (radio % 2 == 0)
+    while (i<altura*2);
+    printf("\n");
+    for (i = 1; i<=altura; i++)
     {
-        printf("\nRadio es par");
+        j = 1;
+        while (j<=i)
+        { 
+            printf("",j);
+            j++;
+        }
+        printf("\n");
     }
+    i = 0;
+    do
+    {
+        printf("-");
+        i++;
+    }
+    while (i<altura*2);
+    printf("\n");*/
 }

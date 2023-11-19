@@ -8,7 +8,7 @@ namespace LYA1_Sintaxis1
 {
     public class Lexico : Token, IDisposable
     {
-        public int linea;
+        public int linea=1;
         const int F = -1;
         const int E = -2; private StreamReader archivo;
         protected StreamWriter log;
@@ -59,14 +59,14 @@ namespace LYA1_Sintaxis1
             archivo = new StreamReader("prueba.cpp");
             log = new StreamWriter("prueba.log");
             log.AutoFlush = true;
-            linea = 1;
+            
         }
         public Lexico(string nombre)
         {
             archivo = new StreamReader(nombre);
             log = new StreamWriter("prueba.log");
             log.AutoFlush = true;
-            linea = 1;
+          
         }
         public void Dispose()
         {
@@ -170,7 +170,6 @@ namespace LYA1_Sintaxis1
                 {
                     // si el caracter fue enter incrementa la linea
                     archivo.Read();
-
                     if (c == '\n')
                     {
                         linea++;
