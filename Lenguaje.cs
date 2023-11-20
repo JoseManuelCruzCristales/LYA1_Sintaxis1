@@ -2,18 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 /*
     Requerimiento 1: Printf -> printf(cadena(, Identificador)?); OK 
     Requerimiento 2: Scanf -> scanf(cadena,&Identificador); OK
-    Requerimiento 3: Agregar a la Asignacion +=, -=, *=. /=, %=
+    Requerimiento 3: Agregar a la Asignacion +=, -=, *=. /=, %=       OK
                      Ejemplo:
                      Identificador IncrementoTermino Expresion;
                      Identificador IncrementoFactor Expresion;
     Requerimiento 4: Agregar el else optativo al if OK
     Requerimiento 5: Indicar el número de linea de los errores OK
 */
-
 namespace LYA1_Sintaxis1
 {
     public class Lenguaje : Sintaxis
@@ -143,7 +141,6 @@ namespace LYA1_Sintaxis1
             }
             match(")");
             match(";");
-
         }
         //Scanf -> scanf(cadena);
 
@@ -159,7 +156,6 @@ namespace LYA1_Sintaxis1
             match(")");
             match(";");
         }
-
         //Asignacion -> Identificador (++ | --) | (= Expresion);
 
         /* Requerimiento 3: Agregar a la Asignacion +=, -=, *=. /=, %=
@@ -230,22 +226,62 @@ namespace LYA1_Sintaxis1
         //While -> while(Condicion) bloque de instrucciones | instruccion
         private void While()
         {
+            match("while");
+            match("(");
+            Condicion();
+            match(")");
+            if (getContenido() == ";")
+            {
+                match(";");
+                Instruccion();
+            }
+            else
+            {
+                bloqueInstrucciones();
+            }
 
         }
         //Do -> do bloque de instrucciones | intruccion while(Condicion)
         private void Do()
         {
-
+            match("do");
+            if (getContenido() == "{")
+            {
+                bloqueInstrucciones();
+            }
+            else
+            {
+                Instruccion();
+                match("while");
+                match("(");
+                Condicion();
+                match(")");
+            }
         }
         //For -> for(Asignacion Condicion; Incremento) Bloque de instruccones | Intruccion 
         private void For()
         {
-
+            match("for");
+            match("(");
+            Asignacion();
+            Condicion();
+            match(";");
+            Incremento();
+            match(")");
+            if (getContenido() == "{")
+            {
+                bloqueInstrucciones();
+            }
+            else
+            {
+                Instruccion();
+            }
         }
         //Incremento -> Identificador ++ | --
         private void Incremento()
         {
-
+            match(Tipos.Identificador);
+            match(Tipos.IncrementoTermino);
         }
         //Main      -> void main() bloqueInstrucciones
         private void Main()

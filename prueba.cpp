@@ -12,10 +12,16 @@ void main()
     x /= (y-3); 
     x --; 
     x *= (x-7);
+    if(x == 0){
     x++;
+    }
+    else{
+        x--;
+    }
+    
     printf("\nValor de altura = ");
     scanf("%d",&altura);
-/*
+
     for (i = 1; i<=altura; i++)
     {
         for (j = 1; j<=i; j++)
@@ -49,5 +55,5 @@ void main()
         i++;
     }
     while (i<altura*2);
-    printf("\n");*/
+    printf("\n");
 }
